@@ -1,0 +1,44 @@
+<% layout('layouts/boilerplate')%>
+
+<!-- search.ejs -->
+
+<div class="container mt-5">
+    <h1 class="my-4 text-center">Search Results</h1>
+
+    <% if (query) { %>
+        <h3>Search by Title: '<%= query %>'</h3>
+    <% } %>
+
+    <% if (cuisine) { %>
+        <h3>Search by Cuisine: '<%= cuisine %>'</h3>
+    <% } %>
+
+    <% if (difficulty) { %>
+        <h3>Search by Difficulty: '<%= difficulty %>'</h3>
+    <% } %>
+
+    <% if (recipes.length === 0) { %>
+        <p>No recipes found.</p>
+    <% } else { %>
+        <div class="row">
+            <% recipes.forEach((recipe) => { %>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="<%=recipe.imageUrl%>" class="card-img-top" alt="<%= recipe.title%>">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= recipe.title %></h5>
+                            <p class="card-text"><%= recipe.description %></p>
+                            <p class="card-text"><strong>Cook Time:</strong> <%= recipe.cookTime %> minutes</p>
+                            <p class="card-text"><strong>Difficulty:</strong> <%= recipe.difficulty %></p>
+                            <p class="card-text"><strong>Cuisine:</strong> <%= recipe.cuisine %></p>
+                            <a href="/recipes/<%=recipe._id%>" class="btn btn-primary">View Recipe</a>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    <% } %>
+</div>
+
+
+

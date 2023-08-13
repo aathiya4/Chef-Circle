@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 800px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .recipe {
+            padding: 20px;
+            background-color: #f3f3f3;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .recipe-image {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        .recipe-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .recipe-description {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Welcome, <%= user.username %>!</h1>
+        
+        <h2 class="mt-4">Favorite Recipes</h2>
+        <div class="row">
+            <% user.favoriteRecipes.forEach((recipe, index) => { %>
+                <div class="col-md-4">
+                    <div class="recipe">
+                        <img src="<%= recipe.imageUrl %>" alt="<%= recipe.title %>" class="recipe-image">
+                        <h3 class="recipe-title"><%= recipe.title %></h3>
+                        <p class="recipe-description"><%= recipe.description %></p>
+                        <a href="/recipes/<%= recipe._id %>" class="btn btn-primary">View Recipe</a>
+                    </div>
+                </div>
+                <% if ((index + 1) % 3 === 0) { %></div><div class="row"><% } %>
+            <% }); %>
+        </div>
+        
+        <h2 class="mt-4">Your Created Recipes</h2>
+<div class="row">
+    <% user.createdRecipes.forEach(recipe => { %>
+        <div class="col-md-4">
+            <div class="recipe">
+                <img src="<%= recipe.imageUrl %>" alt="<%= recipe.title %>" class="recipe-image">
+                <h3 class="recipe-title"><%= recipe.title %></h3>
+                <p class="recipe-description"><%= recipe.description %></p>
+                <a href="/recipes/<%= recipe._id %>" class="btn btn-primary mt-2">View Recipe</a>
+            </div>
+        </div>
+    <% }); %>
+</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nutrition Details</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .btn-back {
+            margin-top: 20px;
+        }
+        ul {
+            padding-left: 20px;
+            list-style-type: disc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Nutrition Details </h1>
+        <% if (nutritionData.calories) { %>
+            <h2>Calories: <%= nutritionData.calories %> kcal</h2>
+        <% } %>
+        <% if (nutritionData.cuisineType && nutritionData.cuisineType.length > 0) { %>
+            <p><strong>Cuisine:</strong> <%= nutritionData.cuisineType.join(', ') %></p>
+        <% } %>
+        <% if (nutritionData.mealType && nutritionData.mealType.length > 0) { %>
+            <p><strong>Meal Type:</strong> <%= nutritionData.mealType.join(', ') %></p>
+        <% } %>
+        <% if (nutritionData.dishType && nutritionData.dishType.length > 0) { %>
+            <p><strong>Dish Type:</strong> <%= nutritionData.dishType.join(', ') %></p>
+        <% } %>
+        
+        <h3 class="mt-4">Ingredients:</h3>
+        <ul>
+            <% for (let i = 0; i < nutritionData.ingredients.length; i++) { %>
+                <li><%= nutritionData.ingredients[i].text %></li>
+            <% } %>
+        </ul>
+
+        <h3 class="mt-4">Total Nutrients (per serving):</h3>
+        <% if (nutritionData.totalNutrients && nutritionData.totalNutrients.PROCNT) { %>
+            <p><strong>Protein:</strong> <%= nutritionData.totalNutrients.PROCNT.quantity.toFixed(2) %> <%= nutritionData.totalNutrients.PROCNT.unit %></p>
+        <% } %>
+        <% if (nutritionData.totalNutrients && nutritionData.totalNutrients.FAT) { %>
+            <p><strong>Fat:</strong> <%= nutritionData.totalNutrients.FAT.quantity.toFixed(2) %> <%= nutritionData.totalNutrients.FAT.unit %></p>
+        <% } %>
+        <% if (nutritionData.totalNutrients && nutritionData.totalNutrients.CHOCDF) { %>
+            <p><strong>Carbohydrates:</strong> <%= nutritionData.totalNutrients.CHOCDF.quantity.toFixed(2) %> <%= nutritionData.totalNutrients.CHOCDF.unit %></p>
+        <% } %>
+        <% if (nutritionData.totalNutrients && nutritionData.totalNutrients.SUGAR) { %>
+            <p><strong>Sugar:</strong> <%= nutritionData.totalNutrients.SUGAR.quantity.toFixed(2) %> <%= nutritionData.totalNutrients.SUGAR.unit %></p>
+        <% } %>
+        
+        
+        <% if (nutritionData.dietLabels && nutritionData.dietLabels.length > 0) { %>
+            <h3 class="mt-4">Diet Labels:</h3>
+            <ul>
+                <% for (let i = 0; i < nutritionData.dietLabels.length; i++) { %>
+                    <li><%= nutritionData.dietLabels[i] %></li>
+                <% } %>
+            </ul>
+        <% } %>
+
+        
+        <% if (nutritionData.healthLabels && nutritionData.healthLabels.length > 0) { %>
+            <h3 class="mt-4">Health Labels:</h3>
+            <ul>
+                <% for (let i = 0; i < nutritionData.healthLabels.length; i++) { %>
+                    <li><%= nutritionData.healthLabels[i] %></li>
+                <% } %>
+            </ul>
+        <% } %>
+        
+        <a href="/recipes/<%= recipeId %>" class="btn btn-primary btn-back mt-4">Back to Recipe</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<% layout('layouts/boilerplate')%>
+
+<!-- home.ejs -->
+
+<div class="container mt-5">
+    <h1 class="my-4 text-center">Welcome to ChefCircle</h1>
+
+    <!-- Add the search form -->
+    <form action="/search" method="GET" class="mb-4">
+        <div class="row g-2 align-items-center">
+            <!-- Search by Title -->
+            <div class="col-md">
+                <input type="text" id="title" name="query" class="form-control" placeholder="Search by title" value="<%= typeof query !== 'undefined' ? query : '' %>">
+            </div>
+
+            <!-- Search by Cuisine -->
+            <div class="col-md">
+                <input type="text" id="cuisine" name="cuisine" class="form-control" placeholder="Choose Cuisine..." value="<%= typeof cuisine !== 'undefined' ? cuisine : '' %>">
+            </div>
+
+            <div class="col-md">
+                <select class="form-select" name="difficulty">
+                    <option value="" selected>Choose Difficulty...</option>
+                    <option value="Easy">Easy</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hard">Hard</option>
+                    <!-- Add more difficulty levels here as needed -->
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+           
+            
+            <div class="col-md-auto">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+    <style>
+        /* Style for the autocomplete menu */
+        .ui-autocomplete {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            float: left;
+            display: none;
+            min-width: 160px;
+            padding: 4px 0;
+            margin: 2px 0 0;
+            list-style: none;
+            font-size: 14px;
+            text-align: left;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border: 1px solid rgba(0,0,0,.15);
+            border-radius: 4px;
+            box-shadow: 0 6px 12px rgba(0,0,0,.175);
+        }
+    
+        /* Style for each item in the autocomplete menu */
+        .ui-autocomplete li {
+            padding: 4px 20px;
+            cursor: pointer;
+        }
+    
+        /* Style for the selected item in the autocomplete menu */
+        .ui-autocomplete li.ui-state-focus {
+            background-color: #f0f0f0;
+        }
+    </style>
+    
+    <!-- Add jQuery and jQuery UI script tags after the custom CSS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+    
+    <script>
+        $(function() {
+            // Fetch cuisines and titles from the server using AJAX
+            $.ajax({
+                url: '/api/cuisines', // Replace with the actual API endpoint to fetch cuisines
+                success: function(cuisines) {
+                    // Autocomplete for cuisine input
+                    $("#cuisine").autocomplete({
+                        source: cuisines,
+                        minLength: 1,
+                        delay: 300
+                    });
+                }
+            });
+    
+            $.ajax({
+                url: '/api/titles', // Replace with the actual API endpoint to fetch titles
+                success: function(titles) {
+                    // Autocomplete for title input
+                    $("#title").autocomplete({
+                        source: titles,
+                        minLength: 1,
+                        delay: 300
+                    });
+                }
+            });
+        });
+    </script>
+
+
+

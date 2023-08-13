@@ -1,0 +1,141 @@
+<% layout('layouts/boilerplate')%>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <!-- Apply the "custom-card" class to the card -->
+            <div class="card custom-card">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4"><%= recipe.title %></h2>
+                    <!-- Add a div for the image with black border -->
+                    <div class="border border-black center-image mb-3">
+                        <img src="<%= recipe.imageUrl %>" class="card-img-top small-image" alt="<%= recipe.title %>">
+                    </div>
+                    <p class="card-text"><strong>Description:</strong> <%= recipe.description %></p>
+                    <p class="card-text"><strong>Cook Time:</strong> <%= recipe.cookTime %> minutes</p>
+                    <p class="card-text"><strong>Difficulty:</strong> <%= recipe.difficulty %></p>
+                    <p class="card-text"><strong>Cuisine:</strong> <%= recipe.cuisine %></p>
+                    <h4 class="mt-4">Ingredients:</h4>
+                    <ul class="list-group">
+                        <% recipe.ingredients.forEach((ingredient) => { %>
+                            <li class="list-group-item"><%= ingredient %></li>
+                        <% }) %>
+                    </ul>
+                    
+                    <h4 class="mt-4">Instructions:</h4>
+                    <ol class="list-group">
+                        <% recipe.instructions.forEach((instruction) => { %>
+                            <li class="list-group-item"><%= instruction %></li>
+                        <% }) %>
+                    </ol>
+                    <p class="card-text"><strong>Created By:</strong></p>
+                    <p class="card-text"><strong>Created At:</strong> <%= recipe.createdAt.toDateString() %></p>
+                    <div class="card-body">
+                        <a class="card-link btn btn-info" href="/recipes/<%=recipe._id%>/edit">Edit</a>
+                        <form class="d-inline" action="/recipes/<%=recipe._id%>?_method=DELETE" method="POST">
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
+                        
+                    </div>
+                   
+                    <div class="col-6">
+                        <div id='map' ></div>
+                
+                       
+                        <h2>Leave a Review</h2>
+                        <form action="/recipes/<%=recipe._id%>/reviews" method="POST" class="mb-3 validated-form" novalidate>
+                            <!-- <div class="mb-3">
+                                <label class="form-label" for="rating">Rating</label>
+                                <input class="form-range" type="range" min="1" max="5" name="review[rating]" id="rating">
+                            </div> -->
+                            <fieldset class="starability-basic">
+                                
+                                <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                                <label for="first-rate1" title="Terrible">1 star</label>
+                                <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                                <label for="first-rate2" title="Not good">2 stars</label>
+                                <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                                <label for="first-rate3" title="Average">3 stars</label>
+                                <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                                <label for="first-rate4" title="Very good">4 stars</label>
+                                <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                                <label for="first-rate5" title="Amazing">5 stars</label>
+                            </fieldset>
+                            <div class="mb-3">
+                                <label class="form-label" for="body">Review Text</label>
+                                <textarea class="form-control" name="review[body]" id="body" cols="30" rows="3" required></textarea>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <button class="btn btn-success">Submit</button>
+                        </form>
+                        
+                        
+                        
+                        <% for(let review of recipe.reviews) { %>
+                        <div class="card mb-3 ">
+                            <div class="card-body">
+                                
+                                <p class="starability-result" data-rating="<%=review.rating%>">
+                                    Rated: <%= review.rating %> stars
+                                </p>
+                                
+                                <p class="card-text">Review: <%= review.body %></p>
+                               
+                                <form action="/recipes/<%=recipe._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
+                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                </form>
+                                
+                               
+                            </div>
+                        </div>
+                        <% } %>
+                    </div>
+                </div>
+                <div id="nutrition-form" class="mt-4">
+                    <form action="/nutrition/<%=recipe._id%>" method="POST">
+                        <!-- Replace ":id" with the actual value you want to send -->
+                       
+                        <button type="submit" class="btn btn-primary">Get Calories</button>
+                    </form>
+                </div>
+                <% if (user.favoriteRecipes.includes(recipe._id)) { %>
+                    <p class="text-success">Added to Favorites</p>
+                    <form action="/profile/<%= user._id %>/unfavorite/<%= recipe._id %>" method="POST">
+                        <button type="submit" class="btn btn-danger mt-2">Remove from Favorites</button>
+                    </form>
+                <% } else { %>
+                    <form action="/profile/<%= user._id %>/favorite/<%= recipe._id %>" method="POST">
+                        <button type="submit" class="btn btn-primary mt-2">Add to Favorites</button>
+                    </form>
+                <% } %>
+        
+                <a href="/profile/<%= user._id %>" class="btn btn-secondary mt-2">Go to Profile</a>
+                
+                    <a href="/recipes" class="btn btn-primary mt-4">Back to Home</a>
+                    
+                    
+                    
+           
+</div>
+
+
+
+
+
+
+
+<!-- <div id="result-container" class="mt-3 d-none">
+    <div id="calories-alert" class="alert alert-success" role="alert">
+        Calories fetched successfully!
+    </div>
+    <div id="calories" class="font-weight-bold"></div>
+    <div id="error-message" class="alert alert-danger mt-3" role="alert" style="display: none;">
+        Unable to fetch calories. Please try again later.
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+

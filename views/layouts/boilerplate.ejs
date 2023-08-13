@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChefCircle</title>
+    <base href="/">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+    integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <link href="/styles/custom.css" rel="stylesheet">
+    <!-- Add custom CSS for the image size -->
+    <style>
+        .small-image {
+            width: 33.33%; /* Reducing the image size to one-third */
+        }
+        .center-image {
+            display: flex;
+            justify-content: center;
+        }
+        .custom-card {
+            border: none;
+        }
+        .small-newimage {
+            width: 150px; /* Adjust image size as needed */
+            height: 150px; /* Maintain aspect ratio */
+            object-fit: cover; /* Ensure images fill the container without distortion */
+        }
+
+        .card-newbody {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-title {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .card-text {
+            margin-bottom: 0.5rem;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            margin-top: 1rem;
+        }
+
+        /* Optional: Add custom CSS for spacing and alignment */
+        .recipe-card {
+            margin-bottom: 2rem;
+        }
+    </style>
+    
+</head>
+
+
+<body class="d-flex flex-column vh-100">
+    <%- include('../partials/navbar')%>
+    <main class="container mt-5">
+        <%- include('../partials/flash')%>
+        <%- body %>
+    </main>
+    <%- include('../partials/footer')%>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+        crossorigin="anonymous"></script>
+
+        
+            <script>
+                (() => {
+        'use strict'
+      
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.validated-form')
+      
+        // Loop over them and prevent submission
+        Array.from(forms).forEach(form => {
+          form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+              event.preventDefault()
+              event.stopPropagation()
+            }
+      
+            form.classList.add('was-validated')
+          }, false)
+        })
+      })()
+            </script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+
+</body>
+
+</html>

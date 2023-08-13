@@ -1,0 +1,84 @@
+
+<% layout('layouts/boilerplate')%>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1 class="text-center mb-4">New Recipe</h1>
+      <form action="/recipes" method="POST" class="validated-form" novalidate>
+        <div class="mb-3">
+          <label class="form-label" for="title">Title</label>
+          <input class="form-control" type="text" id="title" name="title" autofocus required>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="cuisine">Cuisine</label>
+          <input class="form-control" type="text" id="cuisine" name="cuisine" required>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="difficulty">Difficulty</label>
+          <select class="form-select" id="difficulty" name="difficulty" required>
+            <option value="" selected disabled>Select difficulty</option>
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
+          </select>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="cookTime">Cook Time (in minutes)</label>
+          <input class="form-control" type="number" id="cookTime" name="cookTime" required>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="description">Description</label>
+          <textarea class="form-control" id="description" name="description" required></textarea>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="ingredients">Ingredients</label>
+          <textarea class="form-control" id="ingredients" name="ingredients" required></textarea>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="instructions">Instructions</label>
+          <textarea class="form-control" id="instructions" name="instructions" required></textarea>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+
+            <div class="mb-3">
+                <div class="form-file custom-file">
+                    <input type="file" class="form-file-input" id="image" name="image" multiple>
+                    <label class="form-file-label" for="image">
+                        <span class="form-file-text custom-file-label">Choose image(s)...</span>
+                        <span class="form-file-button">Browse</span>
+                    </label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-success">Add recipe</button>
+            </div>
+        </form>
+        <a href="/recipes">All recipes</a>
+    </div>
+</div>
