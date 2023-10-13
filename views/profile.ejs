@@ -1,12 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>User Profile</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<% layout('layouts/boilerplate')%>
     <style>
         body {
-            background-color: #f8f9fa;
-        }
+           
+            
+      background-image: url('https://img.freepik.com/premium-photo/white-food-background-with-empty-white-board-tomatoes-free-space-text-top-view-copy-space_503274-1320.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      
+  }
+        
         .container {
             max-width: 800px;
             padding: 20px;
@@ -32,10 +35,13 @@
             margin-bottom: 10px;
         }
     </style>
-</head>
-<body>
+
+
     <div class="container mt-4">
-        <h1>Welcome, <%= user.username %>!</h1>
+        <% if (user.username) { %>
+        <h1>Welcome, <%= user.username %>!</h1><% }%>
+        <% if (user.googleProvider.displayName) { %>
+            <h1>Welcome, <%= user.googleProvider.displayName %>!</h1><% }%>   
         
         <h2 class="mt-4">Favorite Recipes</h2>
         <div class="row">
@@ -66,5 +72,4 @@
     <% }); %>
 </div>
     </div>
-</body>
-</html>
+

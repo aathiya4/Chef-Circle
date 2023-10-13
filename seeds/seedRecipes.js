@@ -1,5 +1,8 @@
 const Recipe = require('../models/recipes.js'); 
 const mongoose = require('mongoose');
+const axios = require('axios');
+
+
 main().catch(err => console.log(err));
 
 async function main() {
@@ -33,7 +36,7 @@ async function main() {
   {
     title: 'Homemade Margherita Pizza',
     description: 'A classic Margherita pizza with fresh tomatoes, mozzarella, and basil.',
-    ingredients: ['Pizza dough', 'Tomato sauce', 'Fresh mozzarella', 'Fresh basil leaves', 'Olive oil', 'Salt and black pepper'],
+    ingredients: ['100g Pizza dough', '2ml Tomato sauce', '10g Fresh mozzarella', '20g Fresh basil leaves', '1l Olive oil', 'Salt and black pepper'],
     instructions: [
       'Preheat the oven to the highest temperature (usually around 500°F or 260°C).',
       'Roll out the pizza dough on a floured surface to your desired thickness.',
@@ -74,7 +77,7 @@ async function main() {
   {
     title: "Chicken Tikka Masala",
     description: "Tender chicken cooked in a creamy tomato sauce with spices.",
-    ingredients: ["Chicken", "Tomatoes", "Yogurt", "Spices"],
+    ingredients: ["100g Chicken", "10g Tomatoes", "10g Yogurt"],
     instructions: ["Marinate chicken", "Cook the chicken in a sauce", "Prepare the creamy tomato sauce"],
     cookTime: 30,
     cuisine: "Indian",
@@ -82,21 +85,21 @@ async function main() {
     difficulty: "Medium",
     createdBy: '64be0641202dda70cf7f635e'
   },
-  {
-    title: "Caesar Salad",
-    description: "Refreshing salad with romaine lettuce, croutons, and Caesar dressing.",
-    ingredients: ["Romaine lettuce", "Croutons", "Parmesan cheese", "Caesar dressing"],
-    instructions: ["Prepare the lettuce", "Add croutons and cheese", "Toss with Caesar dressing"],
-    cookTime: 15,
-    cuisine: "American",
-    imageUrl:'https://www.licious.in/blog/wp-content/uploads/2020/12/Hyderabadi-chicken-Biryani.jpg',
-    difficulty: "Easy",
-    createdBy: '64be0641202dda70cf7f635e'
-  },
+  // {
+  //   title: "Caesar Salad",
+  //   description: "Refreshing salad with romaine lettuce, croutons, and Caesar dressing.",
+  //   ingredients: ["Romaine lettuce", "Croutons", "Parmesan cheese", "Caesar dressing"],
+  //   instructions: ["Prepare the lettuce", "Add croutons and cheese", "Toss with Caesar dressing"],
+  //   cookTime: 15,
+  //   cuisine: "American",
+  //   imageUrl:'https://www.licious.in/blog/wp-content/uploads/2020/12/Hyderabadi-chicken-Biryani.jpg',
+  //   difficulty: "Easy",
+  //   createdBy: '64be0641202dda70cf7f635e'
+  // },
   {
     title: "Chocolate Chip Cookies",
     description: "Classic cookies with chocolate chips.",
-    ingredients: ["Butter", "Brown sugar", "Egg", "Flour", "Chocolate chips"],
+    ingredients: ["5g Butter", "5g Brown sugar", "10 Eggs", "5g Flour", "2g Chocolate chips"],
     instructions: ["Cream butter and sugar", "Mix in egg and flour", "Add chocolate chips", "Bake the cookies"],
     cookTime: 25,
     cuisine: "Dessert",
@@ -107,7 +110,7 @@ async function main() {
   {
     title: "Beef Stew",
     description: "Hearty stew with tender beef and vegetables.",
-    ingredients: ["Beef", "Potatoes", "Carrots", "Onions", "Beef broth"],
+    ingredients: ["50g Beef", "10g Potatoes", "10g Carrots", "5g Onions", "10g Beef broth"],
     instructions: ["Brown beef", "Add vegetables and broth", "Simmer until beef is tender"],
     cookTime: 120,
     cuisine: "Comfort Food",
@@ -118,7 +121,7 @@ async function main() {
   {
     title: "Miso Soup",
     description: "Traditional Japanese soup made with miso paste and ingredients like tofu and seaweed.",
-    ingredients: ["Dashi stock", "Miso paste", "Tofu", "Seaweed", "Green onions"],
+    ingredients: ["10g Dashi stock", "2l Miso paste", "10g Tofu", "5g Seaweed", "10g Green onions"],
     instructions: ["Prepare the dashi stock", "Add miso paste and other ingredients", "Simmer until flavors meld"],
     cookTime: 25,
     cuisine: "Japanese",
@@ -129,7 +132,7 @@ async function main() {
   {
     title: "Greek Salad",
     description: "Fresh and colorful salad with tomatoes, cucumbers, olives, and feta cheese.",
-    ingredients: ["Tomatoes", "Cucumbers", "Kalamata olives", "Feta cheese", "Olive oil"],
+    ingredients: ["10g Tomatoes", "20g Cucumbers", "5g Kalamata olives", "5g Feta cheese", "10ml Olive oil"],
     instructions: ["Chop the vegetables and cheese", "Toss everything together", "Drizzle with olive oil"],
     cookTime: 15,
     cuisine: "Greek",
@@ -140,7 +143,7 @@ async function main() {
   {
     title: "Pasta Primavera",
     description: "Spring-inspired pasta dish with fresh vegetables and a light sauce.",
-    ingredients: ["Pasta", "Asparagus", "Cherry tomatoes", "Bell peppers", "Parmesan cheese"],
+    ingredients: ["100g Pasta", "50g Asparagus", "10g Cherry tomatoes", "Bell peppers", "10g Parmesan cheese"],
     instructions: ["Cook the pasta", "Sauté vegetables", "Toss with pasta and cheese"],
     cookTime: 20,
     cuisine: "Italian",
@@ -151,7 +154,7 @@ async function main() {
   {
     title: "Sushi Rolls",
     description: "Assorted sushi rolls with fresh fish, vegetables, and rice.",
-    ingredients: ["Sushi rice", "Nori seaweed", "Fresh fish", "Avocado", "Cucumber"],
+    ingredients: ["2 cups Sushi rice", "2g Nori seaweed", "50g Fresh fish", "20g Avocado", "5g Cucumber"],
     instructions: ["Prepare sushi rice", "Assemble rolls with fillings", "Slice and serve"],
     cookTime: 40,
     cuisine: "Japanese",
@@ -162,7 +165,7 @@ async function main() {
   {
     title: "Chicken Alfredo",
     description: "Creamy pasta dish with grilled chicken and Alfredo sauce.",
-    ingredients: ["Chicken breasts", "Fettuccine", "Heavy cream", "Parmesan cheese"],
+    ingredients: ["100g Chicken breasts", "10g Fettuccine", "10g Heavy cream", "5g Parmesan cheese"],
     instructions: ["Cook chicken and pasta", "Prepare Alfredo sauce", "Combine and serve"],
     cookTime: 35,
     cuisine: "Italian",
@@ -173,7 +176,7 @@ async function main() {
   {
     title: "Taco Salad",
     description: "Tex-Mex salad with seasoned ground beef, beans, lettuce, and salsa.",
-    ingredients: ["Ground beef", "Lettuce", "Tomatoes", "Cheddar cheese", "Taco seasoning"],
+    ingredients: ["100g Ground beef", "10g Lettuce", "10g Tomatoes", "10g Cheddar cheese", "5g Taco seasoning"],
     instructions: ["Brown ground beef with seasoning", "Assemble salad with toppings", "Serve with salsa"],
     cookTime: 25,
     cuisine: "Tex-Mex",
@@ -184,7 +187,7 @@ async function main() {
   {
     title: "Ratatouille",
     description: "French vegetable stew with eggplant, zucchini, and tomatoes.",
-    ingredients: ["Eggplant", "Zucchini", "Tomatoes", "Bell peppers", "Herbs de Provence"],
+    ingredients: ["10g Eggplant", "10g Zucchini", "10g Tomatoes", "Bell peppers", "Herbs de Provence"],
     instructions: ["Slice and sauté vegetables", "Layer in a baking dish and bake", "Serve hot"],
     cookTime: 50,
     cuisine: "French",
@@ -195,7 +198,7 @@ async function main() {
   {
     title: "Thai Green Curry",
     description: "Spicy and aromatic Thai curry with coconut milk and green curry paste.",
-    ingredients: ["Chicken thighs", "Coconut milk", "Thai green curry paste", "Vegetables"],
+    ingredients: ["100g Chicken thighs", "10ml Coconut milk", "10g Thai green curry paste"],
     instructions: ["Cook chicken and vegetables", "Simmer in coconut milk and curry paste", "Serve with rice"],
     cookTime: 30,
     cuisine: "Thai",
@@ -206,7 +209,7 @@ async function main() {
   {
     title: "Vegetable Fried Rice",
     description: "Flavorful fried rice with mixed vegetables and soy sauce.",
-    ingredients: ["Cooked rice", "Carrots", "Peas", "Scallions", "Soy sauce"],
+    ingredients: ["200g Cooked rice", "10g Carrots", "5g Peas", "2g Scallions", "1ml Soy sauce"],
     instructions: ["Stir-fry vegetables", "Add rice and soy sauce", "Toss and serve"],
     cookTime: 25,
     cuisine: "Asian",
@@ -217,7 +220,7 @@ async function main() {
   {
     title: "Beef and Broccoli Stir-Fry",
     description: "Quick and tasty stir-fry with beef, broccoli, and a savory sauce.",
-    ingredients: ["Beef sirloin", "Broccoli florets", "Soy sauce", "Garlic", "Ginger"],
+    ingredients: ["50g Beef sirloin", "10g Broccoli florets", "1l Soy sauce", "2g Garlic",  "2g Ginger"],
     instructions: ["Marinate beef", "Stir-fry beef and broccoli", "Add sauce and serve"],
     cookTime: 20,
     cuisine: "Asian",
@@ -225,26 +228,74 @@ async function main() {
     difficulty: "Easy",
     createdBy:'64be0641202dda70cf7f635e'
   },
-  {
-    title: "Miso Soup",
-    description: "Traditional Japanese soup made with miso paste and ingredients like tofu and seaweed.",
-    ingredients: ["Dashi stock", "Miso paste", "Tofu", "Seaweed", "Green onions"],
-    instructions: ["Prepare the dashi stock", "Add miso paste and other ingredients", "Simmer until flavors meld"],
-    cookTime: 25,
-    cuisine: "Japanese",
-    imageUrl:'https://www.licious.in/blog/wp-content/uploads/2020/12/Hyderabadi-chicken-Biryani.jpg',
-    difficulty: "Easy",
-    createdBy: '64be0641202dda70cf7f635e'
-  },
+ 
   
 ];
 
- 
-Recipe.insertMany(recipes)
-  .then(() => console.log('Recipes inserted successfully!'))
-  .catch((err) => console.error('Error inserting recipes:', err));
+const updateSeedRecipesWithNutrition = async () => {
+  const appId = '3782178f';
+  const appKey = '618881cbbaf25ea4d83a514fb693eff7';
+  const apiUrl = 'https://api.edamam.com/api/nutrition-details';
 
-  console.log(Recipe)
+  try {
+    for (const recipe of recipes) {
+      const requestBody = {
+        title: recipe.title,
+        ingr: recipe.ingredients
+      };
+
+      try {
+        const response = await axios.post(apiUrl, requestBody, {
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+          },
+          params: {
+            app_id: appId,
+            app_key: appKey
+          }
+        });
+
+        const nutritionData = response.data;
+
+        // Update the recipe object with nutrition data if available
+        if (nutritionData.calories) {
+          recipe.calories = nutritionData.calories;
+        }
+        if (nutritionData.mealType) {
+          recipe.mealType = nutritionData.mealType;
+        }
+        if (nutritionData.dishType) {
+          recipe.dishType = nutritionData.dishType;
+        }
+
+        // Create a new Recipe document in the database
+        const newRecipe = new Recipe(recipe);
+        await newRecipe.save();
+        
+        console.log(`Recipe '${recipe.title}' updated with nutrition data and inserted into the database.`);
+      } catch (error) {
+        console.error(`Error updating recipe '${recipe.title}':`, error);
+        console.log(`Recipe '${recipe.title}' will be skipped due to API error.`);
+      }
+    }
+
+    console.log('Seed recipes update completed.');
+  } catch (error) {
+    console.error('Error updating seed recipes:', error);
+  }
+};
+
+updateSeedRecipesWithNutrition();
+
+
+
+ 
+// Recipe.insertMany(recipes)
+//   .then(() => console.log('Recipes inserted successfully!'))
+//   .catch((err) => console.error('Error inserting recipes:', err));
+
+//   console.log(Recipe)
   
   
   

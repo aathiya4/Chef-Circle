@@ -1,0 +1,82 @@
+<% layout('layouts/boilerplate') %>
+<style>
+    body {
+        background-image: url('https://img.freepik.com/premium-photo/white-food-background-with-empty-white-board-tomatoes-free-space-text-top-view-copy-space_503274-1320.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+
+    .mealplan-container {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 30px;
+        border-radius: 10px;
+        margin: 50px 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .mealplan-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .form-group {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .form-control {
+        width: 60%;
+        margin: 0 auto;
+    }
+
+    .btn-primary {
+        display: block;
+        margin: 0 auto;
+    }
+
+    /* Custom style for dropdown indicator */
+    .select-dropdown {
+        background-image: url("https://cdn-icons-png.flaticon.com/512/149/149337.png");
+        background-position: right 12px center;
+        background-repeat: no-repeat;
+        background-size: 15px 15px;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="mealplan-container">
+                <h1 class="mealplan-title">Generate Meal Plan</h1>
+                <form action="/mealplan" method="POST">
+                    <div class="form-group">
+                        <label for="calories">Calories:</label>
+                        <input type="number" class="form-control" id="calories" name="calories" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dietType">Diet Type:</label>
+                        <select class="form-control select-dropdown" id="dietType" name="dietType">
+                            <option value="Vegan">Vegan</option>
+                            <option value="Vegetarian">Vegetarian</option>
+                            <option value="Ketogenic">Ketogenic</option>
+                            <option value="Primal">Primal</option>
+                            <option value="Ovo-Vegetarian">Ovo-vegetarian</option>
+                            <option value="Lacto-Vegetarian">Lacto-vegetarian</option>
+                            <option value="Gluten Free">Gluten Free</option>
+                            <option value="Whole30">Whole30</option>
+                            <option value="Pescetarian">Pescetarian</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Generate Meal Plan</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

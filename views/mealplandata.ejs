@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Meal Plan Details</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+     .wrapper {
+      position: relative;
+      overflow: hidden;
+      background-image: url('https://img.freepik.com/premium-photo/white-food-background-with-empty-white-board-tomatoes-free-space-text-top-view-copy-space_503274-1320.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    .overlay {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.3); /* Adjust the opacity here */
+      z-index: -1; /* Place the overlay behind other content */
+    }
+
+    body {
+      color: #333; /* Set text color */
+    }
+
+    .card {
+      border: none;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card-header {
+      background-color: #f8f9fa;
+      border-bottom: none;
+      font-weight: bold;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      cursor: pointer; /* Add cursor style to indicate it's clickable */
+      color: #007bff; /* Add color to make it look like a link */
+      text-decoration: underline; /* Add underline to make it look like a link */
+    }
+
+    .card-title:hover {
+      color: #0056b3; /* Darken the color on hover */
+    }
+
+    .meal-image {
+      max-height: 200px;
+      object-fit: cover;
+    }
+
+    .nutritional-info {
+      background-color: #f8f9fa;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="overlay"></div>
+    <div class="container mt-5">
+    <h1 class="text-center mb-4">Weekly Meal Plan</h1>
+    <% if (mealPlan) { %>
+      <div class="row">
+        <% for (const day in mealPlan.week) { %>
+          <div class="col-md-6 mb-4">
+            <div class="card">
+              <div class="card-header text-center">
+                <h3><%= day.charAt(0).toUpperCase() + day.slice(1) %></h3>
+              </div>
+              <div class="card-body">
+                <% mealPlan.week[day].meals.forEach((meal) => { %>
+                  <div class="mb-4">
+                    <img src="<%= meal.imageType === 'jpg' ? `https://spoonacular.com/recipeImages/${meal.id}-312x231.${meal.imageType}` : '' %>"
+                    class="img-fluid rounded meal-image" alt="<%= meal.title %>">
+                    <h5 class="mt-3 card-title" onclick="window.open('<%= meal.sourceUrl %>', '_blank')"><%= meal.title %></h5>
+                    <p><strong>Ready in:</strong> <%= meal.readyInMinutes %> minutes</p>
+                    <p><strong>Servings:</strong> <%= meal.servings %></p>
+                  </div>
+                <% }); %>
+                <div class="nutritional-info mt-3">
+                  <h5>Nutritional Information:</h5>
+                  <p><strong>Calories:</strong> <%= mealPlan.week[day].nutrients.calories.toFixed(2) %></p>
+                  <p><strong>Protein:</strong> <%= mealPlan.week[day].nutrients.protein.toFixed(2) %> g</p>
+                  <p><strong>Fat:</strong> <%= mealPlan.week[day].nutrients.fat.toFixed(2) %> g</p>
+                  <p><strong>Carbohydrates:</strong> <%= mealPlan.week[day].nutrients.carbohydrates.toFixed(2) %> g</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% } %>
+      </div>
+      <!-- Button to go to all recipes -->
+      <div class="text-center mt-4">
+        <a href="/" class="btn btn-primary">Back to home</a>
+      </div>
+    <% } else { %>
+      <p class="text-center">No meal plan available.</p>
+    <% } %>
+  </div>
+</body>
+</html>

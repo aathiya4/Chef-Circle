@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meal Plan</title>
+  <!-- Include necessary CSS and stylesheets -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Add your custom CSS styles if needed -->
+  <style>
+    /* Add your custom CSS styles here */
+  </style>
+</head>
+
+<body>
+  <div class="container mt-5">
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Plan</title>
+    <!-- Include your CSS stylesheets or CDN links here -->
+</head>
+<body>
+    <h1>Weekly Meal Plan</h1>
+    <% Object.keys(mealPlan).forEach(day => { %>
+        <h2><%= day.charAt(0).toUpperCase() + day.slice(1) %></h2>
+        <div class="day-meals">
+            <% mealPlan[day].meals.forEach(meal => { %>
+                <div class="meal">
+                    <h3><%= meal.title %></h3>
+                    <p>Servings: <%= meal.servings %></p>
+                    <p><a href="<%= meal.sourceUrl %>" target="_blank">Recipe Details</a></p>
+                </div>
+            <% }); %>
+        </div>
+    <% }); %>
+    <!-- Include your JS scripts or CDN links here -->
+</body>
+</html>

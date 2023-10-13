@@ -30,7 +30,7 @@ module.exports.isAuthor = async (req, res, next) => {
     const recipe = await Recipe.findById(id);
     console.log(recipe.createdBy);
    
-    if (!recipe.createdBy.equals(req.user._id)) {
+    if (!recipe.createdBy.equals(req.user._id || req.passport.user )) {
         req.flash('error', 'You do not have permission to do that!');
         return res.redirect(`/recipes/${id}`);
     }

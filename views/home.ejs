@@ -1,108 +1,182 @@
 <% layout('layouts/boilerplate')%>
+<style>
+    body {
+      background-image: url('https://img.freepik.com/premium-photo/white-food-background-with-empty-white-board-tomatoes-free-space-text-top-view-copy-space_503274-1320.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      
+  }
 
-<!-- home.ejs -->
+    /* Additional styling for the search form */
+    .search-form {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 10px;
+    }
+</style>
 
-<div class="container mt-5">
-    <h1 class="my-4 text-center">Welcome to ChefCircle</h1>
+
+  
+
+    <div class="container mt-5">
+        <h1 class="my-4 text-center">Welcome to ChefCircle</h1>
+
+        <div class="row justify-content-center">
+            <div class="col-md-4 text-center">
+                <a href="/recipes" class="text-decoration-none">
+                    <div class="icon-box">
+                        <i class="fas fa-utensils fa-4x"></i>
+                        <h3 class="mt-2">Recipes</h3>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 text-center">
+                <a href="/recipes/new" class="text-decoration-none">
+                    <div class="icon-box">
+                        <i class="fas fa-plus-circle fa-4x"></i>
+                        <h3 class="mt-2">New Recipe</h3>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 text-center">
+                <a href="/mealplan" class="text-decoration-none">
+                    <div class="icon-box">
+                        <i class="fas fa-calendar-alt fa-4x"></i>
+                        <h3 class="mt-2">Meal Planner</h3>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
 
     <!-- Add the search form -->
     <form action="/search" method="GET" class="mb-4">
-        <div class="row g-2 align-items-center">
-            <!-- Search by Title -->
-            <div class="col-md">
+        <div class="row g-2 align-items-center justify-content-center">
+            <div class="col-md-3">
                 <input type="text" id="title" name="query" class="form-control" placeholder="Search by title" value="<%= typeof query !== 'undefined' ? query : '' %>">
             </div>
 
-            <!-- Search by Cuisine -->
-            <div class="col-md">
-                <input type="text" id="cuisine" name="cuisine" class="form-control" placeholder="Choose Cuisine..." value="<%= typeof cuisine !== 'undefined' ? cuisine : '' %>">
+            <div class="col-md-3">
+                <input type="text" id="cuisine" name="cuisine" class="form-control" placeholder="Search by cuisine" value="<%= typeof cuisine !== 'undefined' ? cuisine : '' %>">
             </div>
 
-            <div class="col-md">
+            <div class="col-md-2">
+                <select class="form-select" name="mealType">
+                    <option value="" selected>Meal Type...</option>
+                    <option value="breakfast">Breakfast</option>
+                    <option value="brunch">Brunch</option>
+                    <option value="lunch/dinner">Lunch/Dinner</option>
+                    <option value="snack">Snack</option>
+                    <option value="teatime">Teatime</option>
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <select class="form-select" name="dishType">
+                    <option value="" selected>Dish Type...</option>
+                    <!-- Add other options here -->
+                </select>
+            </div>
+
+            <div class="col-md-2">
                 <select class="form-select" name="difficulty">
-                    <option value="" selected>Choose Difficulty...</option>
+                    <option value="" selected>Difficulty...</option>
                     <option value="Easy">Easy</option>
                     <option value="Medium">Medium</option>
                     <option value="Hard">Hard</option>
-                    <!-- Add more difficulty levels here as needed -->
-                    <option value="Other">Other</option>
                 </select>
             </div>
-           
-            
-            <div class="col-md-auto">
-                <button type="submit" class="btn btn-primary">Search</button>
+
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary btn-block">Search</button>
             </div>
         </div>
     </form>
+
+    
+
+<style>
+    /* Additional styling for the icon boxes */
+    .icon-box {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s;
+    }
+
+    .icon-box:hover {
+        transform: translateY(-5px);
+    }
+
+    .icon-box i {
+        color: #007bff;
+    }
+</style>
 </div>
 
-    <style>
-        /* Style for the autocomplete menu */
-        .ui-autocomplete {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            z-index: 1000;
-            float: left;
-            display: none;
-            min-width: 160px;
-            padding: 4px 0;
-            margin: 2px 0 0;
-            list-style: none;
-            font-size: 14px;
-            text-align: left;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border: 1px solid rgba(0,0,0,.15);
-            border-radius: 4px;
-            box-shadow: 0 6px 12px rgba(0,0,0,.175);
-        }
-    
-        /* Style for each item in the autocomplete menu */
-        .ui-autocomplete li {
-            padding: 4px 20px;
-            cursor: pointer;
-        }
-    
-        /* Style for the selected item in the autocomplete menu */
-        .ui-autocomplete li.ui-state-focus {
-            background-color: #f0f0f0;
-        }
-    </style>
-    
-    <!-- Add jQuery and jQuery UI script tags after the custom CSS -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
-    
-    <script>
-        $(function() {
-            // Fetch cuisines and titles from the server using AJAX
-            $.ajax({
-                url: '/api/cuisines', // Replace with the actual API endpoint to fetch cuisines
-                success: function(cuisines) {
-                    // Autocomplete for cuisine input
-                    $("#cuisine").autocomplete({
-                        source: cuisines,
-                        minLength: 1,
-                        delay: 300
-                    });
-                }
-            });
-    
-            $.ajax({
-                url: '/api/titles', // Replace with the actual API endpoint to fetch titles
-                success: function(titles) {
-                    // Autocomplete for title input
-                    $("#title").autocomplete({
-                        source: titles,
-                        minLength: 1,
-                        delay: 300
-                    });
-                }
-            });
+
+<style>
+    /* Style for the autocomplete menu */
+    .ui-autocomplete {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1000;
+        float: left;
+        display: none;
+        min-width: 160px;
+        padding: 4px 0;
+        margin: 2px 0 0;
+        list-style: none;
+        font-size: 14px;
+        text-align: left;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border: 1px solid rgba(0,0,0,.15);
+        border-radius: 4px;
+        box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    }
+
+    /* Style for each item in the autocomplete menu */
+    .ui-autocomplete li {
+        padding: 4px 20px;
+        cursor: pointer;
+    }
+
+    /* Style for the selected item in the autocomplete menu */
+    .ui-autocomplete li.ui-state-focus {
+        background-color: #f0f0f0;
+    }
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+
+<script>
+    $(function() {
+        $.ajax({
+            url: '/api/cuisines',
+            success: function(cuisines) {
+                $("#cuisine").autocomplete({
+                    source: cuisines,
+                    minLength: 1,
+                    delay: 300
+                });
+            }
         });
-    </script>
 
-
-
+        $.ajax({
+            url: '/api/titles',
+            success: function(titles) {
+                $("#title").autocomplete({
+                    source: titles,
+                    minLength: 1,
+                    delay: 300
+                });
+            }
+        });
+    });
+</script>

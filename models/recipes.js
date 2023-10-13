@@ -21,6 +21,15 @@ const recipeSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  mealType:{
+    type: [String],
+  },
+  dishType:{
+    type: [String],
+  },
+  calories:{
+    type: Number,
+  },
   cuisine: {
     type: String,
     required: true,

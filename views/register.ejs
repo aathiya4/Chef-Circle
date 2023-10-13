@@ -10,52 +10,128 @@
     
 </head>
 
+<style>
+  /* Add custom CSS styles here */
+  body {
+      background-image: url('https://img.freepik.com/premium-photo/white-food-background-with-empty-white-board-tomatoes-free-space-text-top-view-copy-space_503274-1320.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      
+  }
+
+  .card {
+      background-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 15px;
+  }
+
+  .card-body {
+      padding: 30px;
+  }
+
+  .card-title {
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+  }
+
+  .form-label {
+      font-weight: bold;
+  }
+
+  .button.google {
+      background-color: #DB4437;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      display: inline-block;
+      margin-top: 10px;
+      transition: background-color 0.3s;
+  }
+
+  .button.google:hover {
+      background-color: #C53630;
+  }
+
+  .btn-success {
+      background-color: #28A745;
+      border: none;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 5px;
+      display: block;
+      width: 100%;
+      margin-top: 20px;
+      transition: background-color 0.3s;
+  }
+
+  .btn-success:hover {
+      background-color: #1E7033;
+  }
+</style>
+</head>
+
 <body>
 <div class="container d-flex justify-content-center align-items-center mt-5">
-    <div class="row">
-        <div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
-            
-                <div class="card-body">
-                    <h5 class="card-title">Register for ChefCircle</h5>
-                    <form action="/register" method="POST" class="validated-form" novalidate >
-                        <div class="mb-3">
-                            <label class="form-label" for="username">Username</label>
-                            <input class="form-control" type="text" id="username" name="username" required autofocus>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="email">Email</label>
-                            <input class="form-control" type="email" id="email" name="email" required>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="password">Password</label>
-                            <input class="form-control" type="password" id="password" name="password" required>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-check">
+  <div class="row">
+      <div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
+          <div class="card">
+              <div class="card-body">
+                  <h5 class="card-title">Register for ChefCircle</h5>
+                  <form action="/register" method="POST" class="validated-form" novalidate>
+                      <div class="mb-3">
+                          <label class="form-label" for="username">Username</label>
+                          <input class="form-control" type="text" id="username" name="username" required
+                              autofocus>
+                          <div class="valid-feedback">
+                              Looks good!
+                          </div>
+                      </div>
+                      <div class="mb-3">
+                          <label class="form-label" for="email">Email</label>
+                          <input class="form-control" type="email" id="email" name="email" required>
+                          <div class="valid-feedback">
+                              Looks good!
+                          </div>
+                      </div>
+                      <div class="mb-3">
+                          <label class="form-label" for="password">Password</label>
+                          <input class="form-control" type="password" id="password" name="password" required>
+                          <div class="valid-feedback">
+                              Looks good!
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-check">
                               <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
                               <label class="form-check-label" for="invalidCheck">
-                                Agree to terms and conditions
+                                  Agree to terms and conditions
                               </label>
                               <div class="invalid-feedback">
-                                You must agree before submitting.
+                                  You must agree before submitting.
                               </div>
-                            </div>
                           </div>
-                        <button class="btn btn-success btn-block">Register</button>
-                    </form>
-                </div>
-        </div>
-    </div>
+                      </div>
+                      <!-- Google Sign-Up Button -->
+                      <a class="button google" href="/login/federated/google">
+                          <img src="https://www.gstatic.com/images/branding/product/2x/googleg_48dp.png"
+                              alt="Google Logo" style="height: 24px; width: 24px; margin-right: 10px;">Sign Up with Google
+                      </a>
+                      <button class="btn btn-success">Register</button>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+  integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+  crossorigin="anonymous"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
     integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
     crossorigin="anonymous"></script>
