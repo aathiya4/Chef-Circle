@@ -150,7 +150,7 @@ app.get('/search', async (req, res) => {
 });
 
   
-  // Helper function to get suggested title
+  // Helper function to get suggested titles
   async function getSuggestedTitle(title) {
     const titles = await getUniqueTitles(); 
     const matches = stringSimilarity.findBestMatch(title, titles);
@@ -166,7 +166,7 @@ app.get('/search', async (req, res) => {
     }
   }
   
-  // Helper function to get suggested cuisine
+  // Helper function to get suggested cuisines
   async function getSuggestedCuisine(cuisine) {
     const cuisines = await getUniqueCuisines(); 
     const matches = stringSimilarity.findBestMatch(cuisine, cuisines);
