@@ -1,5 +1,4 @@
-// const { Schema, reviewSchema } = require('./schemas.js');
-// const ExpressError = require('./utils/ExpressError');
+
 const Recipe = require('./models/recipes');
 const Review = require('./models/review');
 
@@ -15,7 +14,7 @@ module.exports.isLoggedIn = (req, res, next) => {
 }
 
 module.exports.validateRecipe = (req, res, next) => {
-    const { error } = recipeSchema.validate(req.body);
+    const { error } = Recipe.validate(req.body);
     console.log(req.body);
     if (error) {
         const msg = error.details.map(el => el.message).join(',')
@@ -50,7 +49,7 @@ module.exports.isReviewAuthor = async (req, res, next) => {
 }
 
 module.exports.validateReview = (req, res, next) => {
-    const { error } = reviewSchema.validate(req.body);
+    const { error } = Review.validate(req.body);
     if (error) {
         const msg = error.details.map(el => el.message).join(',')
         throw new ExpressError(msg, 400)

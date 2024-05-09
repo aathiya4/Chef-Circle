@@ -11,7 +11,7 @@
 </head>
 
 <style>
-  /* Add custom CSS styles here */
+
   body {
       background-image: url('https://img.freepik.com/premium-photo/white-food-background-with-empty-white-board-tomatoes-free-space-text-top-view-copy-space_503274-1320.jpg');
       background-size: cover;
@@ -116,7 +116,7 @@
                               </div>
                           </div>
                       </div>
-                      <!-- Google Sign-Up Button -->
+
                       <a class="button google" href="/login/federated/google">
                           <img src="https://www.gstatic.com/images/branding/product/2x/googleg_48dp.png"
                               alt="Google Logo" style="height: 24px; width: 24px; margin-right: 10px;">Sign Up with Google
@@ -142,11 +142,9 @@
         <script>
             (() => {
     'use strict'
-  
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+ 
     const forms = document.querySelectorAll('.validated-form')
-  
-    // Loop over them and prevent submission
+ 
     Array.from(forms).forEach(form => {
       form.addEventListener('submit', event => {
         if (!form.checkValidity()) {

@@ -9,7 +9,6 @@ async function fetchNutritionalData(ingredient) {
   try {
     const response = await axios.get(apiUrl);
 
-    // Extract the nutritional data from the response
     const nutritionData = response.data;
 
     return nutritionData;

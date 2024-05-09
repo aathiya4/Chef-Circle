@@ -8,7 +8,6 @@ main().catch(err => console.log(err));
 async function main() {
   await mongoose.connect('mongodb://127.0.0.1:27017/recipe-app');
 
-  // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
 }
 
 // const seedDB =async () => {
@@ -85,17 +84,7 @@ async function main() {
     difficulty: "Medium",
     createdBy: '64be0641202dda70cf7f635e'
   },
-  // {
-  //   title: "Caesar Salad",
-  //   description: "Refreshing salad with romaine lettuce, croutons, and Caesar dressing.",
-  //   ingredients: ["Romaine lettuce", "Croutons", "Parmesan cheese", "Caesar dressing"],
-  //   instructions: ["Prepare the lettuce", "Add croutons and cheese", "Toss with Caesar dressing"],
-  //   cookTime: 15,
-  //   cuisine: "American",
-  //   imageUrl:'https://www.licious.in/blog/wp-content/uploads/2020/12/Hyderabadi-chicken-Biryani.jpg',
-  //   difficulty: "Easy",
-  //   createdBy: '64be0641202dda70cf7f635e'
-  // },
+  
   {
     title: "Chocolate Chip Cookies",
     description: "Classic cookies with chocolate chips.",

@@ -1,4 +1,15 @@
-<% layout('layouts/boilerplate')%>
+
+    <% layout('layouts/boilerplate')%>
+    <style>
+        body {
+          background-image: url('https://img.freepik.com/premium-photo/white-food-background-with-empty-white-board-tomatoes-free-space-text-top-view-copy-space_503274-1320.jpg');
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          
+      }
+      </style>
+
 
 <div class="container mt-5">
   <h1 class="my-4 text-center">Welcome to ChefCircle</h1>
@@ -10,7 +21,7 @@
                   <img src="<%=recipe.imageUrl%>" class="card-img-top" alt="<%= recipe.title%>">
                   <div class="card-body">
                       <h5 class="card-title"><%= recipe.title %></h5>
-                      <p class="card-text"><%= recipe._id %></p>
+                     
                       <p class="card-text"><%= recipe.description %></p>
                       <p class="card-text"><strong>Cook Time:</strong> <%= recipe.cookTime %> minutes</p>
                       <p class="card-text"><strong>Difficulty:</strong> <%= recipe.difficulty %></p>

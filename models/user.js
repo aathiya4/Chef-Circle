@@ -13,7 +13,7 @@ const UserSchema = new Schema({
     password: String,
     favoriteRecipes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Recipe' }],
     createdRecipes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Recipe' }],
-    // ... other fields
+
 });
 UserSchema.plugin(passportLocalMongoose);
 
