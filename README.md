@@ -1,2 +1,2 @@
 # ChefCircle
-Online Recipe sharing platform
+Online Recipe sharing website
